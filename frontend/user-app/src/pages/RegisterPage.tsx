@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Form, Input, Button, Card, message } from 'antd'
+import type { FormProps } from 'antd'
 import { UserOutlined, PhoneOutlined, LockOutlined, SafetyOutlined } from '@ant-design/icons'
 import { userApi } from '@/api'
 import type { RegisterRequest } from '@/types'
@@ -44,7 +45,7 @@ export default function RegisterPage() {
     }
   }
 
-  const onFinish = async (values: RegisterRequest) => {
+  const onFinish: FormProps<RegisterRequest>['onFinish'] = async values => {
     try {
       await userApi.register(values)
       message.success('注册成功，请登录')

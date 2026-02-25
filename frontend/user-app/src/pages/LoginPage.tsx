@@ -3,6 +3,7 @@
  */
 import { useNavigate, Link } from 'react-router-dom'
 import { Form, Input, Button, Card, message } from 'antd'
+import type { FormProps } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useAuthStore } from '@/stores'
 import { userApi } from '@/api'
@@ -11,9 +12,9 @@ import type { LoginRequest } from '@/types'
 export default function LoginPage() {
   const navigate = useNavigate()
   const { setAuth } = useAuthStore()
-  const [form] = Form.useForm()
+  const [form] = Form.useForm() // 创建表单实例
 
-  const onFinish = async (values: LoginRequest) => {
+  const onFinish: FormProps<LoginRequest>['onFinish'] = async values => {
     try {
       const response = await userApi.login(values)
       setAuth(response.user, response.access_token)
@@ -60,9 +61,14 @@ export default function LoginPage() {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="w-full">
+            <div className='flex justify-between'>
+              <Button type="default" htmlType="button" onClick={() => form.resetFields()} className="w-2/5">
+              重置
+            </Button>
+            <Button type="primary" htmlType="submit" className="w-2/5">
               登录
             </Button>
+            </div>
           </Form.Item>
         </Form>
 

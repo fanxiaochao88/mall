@@ -1,6 +1,7 @@
 /**
  * 路由配置
  */
+import { Suspense, lazy } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import MainLayout from '@/layouts/MainLayout'
 import UserLayout from '@/layouts/UserLayout'
@@ -9,6 +10,9 @@ import UserLayout from '@/layouts/UserLayout'
 import HomePage from '@/pages/HomePage'
 import LoginPage from '@/pages/LoginPage'
 import RegisterPage from '@/pages/RegisterPage'
+
+const ProfilePage = lazy(() => import('@/pages/user/Profile'))
+const AddressPage = lazy(() => import('@/pages/user/address/Address'))
 
 const router = createBrowserRouter([
   {
@@ -44,17 +48,25 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/user/orders" replace />,
+        element: <Navigate to="/user/profile" replace />,
       },
       // TODO: 用户中心路由
-      // {
-      //   path: 'orders',
-      //   element: <OrderListPage />,
-      // },
-      // {
-      //   path: 'orders/:id',
-      //   element: <OrderDetailPage />,
-      // },
+      {
+        path: 'profile',
+        element: (
+          <Suspense fallback={<div>加载中...</div>}>
+            <ProfilePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'address',
+        element: (
+          <Suspense fallback={<div>加载中...</div>}>
+            <AddressPage />
+          </Suspense>
+        ),
+      },
     ],
   },
 ])

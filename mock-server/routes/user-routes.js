@@ -414,10 +414,12 @@ export function setupUserRoutes(server) {
 
   // ==================== 收货地址模块 ====================
 
+  // 获取收货地址列表
   server.get('/api/v1/user/addresses', (req, res) => {
     res.json({ code: 200, message: '成功', data: addresses })
   })
 
+  // 添加收货地址
   server.post('/api/v1/user/addresses', (req, res) => {
     const address = {
       id: addressIdCounter++,
@@ -434,6 +436,7 @@ export function setupUserRoutes(server) {
     res.json({ code: 200, message: '添加成功', data: address })
   })
 
+  // 更新收货地址
   server.put('/api/v1/user/addresses/:id', (req, res) => {
     const { id } = req.params
     const index = addresses.findIndex(addr => addr.id === parseInt(id))
@@ -448,12 +451,14 @@ export function setupUserRoutes(server) {
     res.json({ code: 200, message: '更新成功', data: addresses[index] })
   })
 
+  // 删除收货地址
   server.delete('/api/v1/user/addresses/:id', (req, res) => {
     const { id } = req.params
     addresses = addresses.filter(addr => addr.id !== parseInt(id))
     res.json({ code: 200, message: '删除成功', data: null })
   })
 
+  // 设置默认收货地址
   server.post('/api/v1/user/addresses/:id/set-default', (req, res) => {
     const { id } = req.params
     addresses.forEach(addr => {
