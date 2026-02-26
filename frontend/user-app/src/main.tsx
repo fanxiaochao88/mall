@@ -11,8 +11,8 @@ import router from './router'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 1,
-      refetchOnWindowFocus: false,
+      retry: 1, // 重试次数
+      refetchOnWindowFocus: false, // 窗口焦点变化时是否重新获取数据
     },
   },
 })

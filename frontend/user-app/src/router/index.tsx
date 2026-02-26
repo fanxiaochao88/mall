@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: (
-          <Suspense fallback={<div>加载中...</div>}>
+          <Suspense>
             <ProfilePage />
           </Suspense>
         ),
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
       {
         path: 'address',
         element: (
-          <Suspense fallback={<div>加载中...</div>}>
+          <Suspense>
             <AddressPage />
           </Suspense>
         ),

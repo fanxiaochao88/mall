@@ -1,26 +1,44 @@
 import React, { useState } from 'react'
 import { useAddress } from '@/hooks/serverData/useAddress'
 import { EnvironmentOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button, Modal } from 'antd'
+import { Button, Modal, Spin, Result, message } from 'antd'
 import AddressItem from '@/components/addressItem'
 import type { Address } from '@/types'
 import { AddressModal } from './AddressModal'
 
 const AddressManagePage: React.FC = () => {
-    const { addresses, isLoading, error, deleteAddress, createAddress, updateAddress, isCreateLoading, isUpdateLoading, setDefaultAddress } = useAddress()
+    const { addresses, isLoading, error, deleteAddress, createAddress, updateAddress, isCreateLoading, isUpdateLoading, setDefaultAddress, handleRefresh } = useAddress()
     const [modal, contextHolder] = Modal.useModal();
+    const [messageApi, messageContextHolder] = message.useMessage()
     const [open, setOpen] = useState(false)
     const [isAdd, setIsAdd] = useState(true)
     const [currentAddress, setCurrentAddress] = useState<Address | null>(null)
 
     // loading
     if (isLoading) {
-        return <div>加载中...</div>
+        return (
+          <div className='flex items-center justify-center w-full h-full'>
+            <Spin size="large" />
+          </div>
+        )
     }
 
     // error
     if (error) {
-        return <div>加载失败</div>
+        return (
+          <div className='flex items-center justify-center w-full h-full'>
+            <Result
+              status="error"
+              title="加载失败"
+              subTitle="请稍后重试"
+              extra={[
+                <Button type="primary" key="console" onClick={handleRefresh}>
+                  重试
+                </Button>
+              ]}
+            />
+          </div>
+        )
     }
 
     const handleDelete = (id: number) => {
@@ -28,12 +46,18 @@ const AddressManagePage: React.FC = () => {
         title: '删除地址',
         content: '确定要删除该收货地址吗？',
         onOk: () => {
+          // 判断是否是默认地址
+          if (addresses?.some((address) => address.id === id && address.is_default)) {
+            messageApi.error('默认地址不能删除')
+            return
+          }
           deleteAddress(id)
         }
       })
     }
 
     const handleAdd = () => {
+      setCurrentAddress(null)
       setOpen(true)
       setIsAdd(true)
     }
@@ -79,6 +103,7 @@ const AddressManagePage: React.FC = () => {
             loading={isCreateLoading || isUpdateLoading}
           />
           {contextHolder}
+          {messageContextHolder}
         </div>
     )
 }

@@ -52,7 +52,10 @@ export const AddressModal: React.FC<Props> = ({ open, isAdd, initialData, onClos
             <Form.Item
               name="receiver_phone"
               label="手机号"
-              rules={[{ required: true, message: '请输入手机号' }]}
+              rules={[
+                { required: true, message: '请输入手机号' },
+                { pattern: /^1[3-9]\d{9}$/, message: '请输入有效的手机号' }
+              ]}
             >
               <Input placeholder="手机号" />
             </Form.Item>

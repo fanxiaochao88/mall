@@ -24,7 +24,7 @@ server.use(middlewares)
 
 // 模拟延迟
 server.use((req, res, next) => {
-  setTimeout(next, 300) // 300ms延迟
+  setTimeout(next, 600) // 300ms延迟
 })
 
 // Token验证中间件

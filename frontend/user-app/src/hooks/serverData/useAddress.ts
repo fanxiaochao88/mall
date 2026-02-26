@@ -95,6 +95,11 @@ export function useAddress() {
     },
   })
 
+  // 手动刷新
+  const handleRefresh = () => {
+    queryClient.invalidateQueries({ queryKey: addressKeys.all })
+  }
+
   return {
     addresses,
     isLoading,
@@ -108,5 +113,6 @@ export function useAddress() {
     isUpdateLoading: updateMutation.isPending,
     isDeleteLoading: deleteMutation.isPending,
     isSetDefaultLoading: setDefaultMutation.isPending,
+    handleRefresh,
   }
 }

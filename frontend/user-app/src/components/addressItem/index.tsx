@@ -11,9 +11,7 @@ interface Props {
   onEdit: (record: Address) => void // 编辑
   onDelete: (id: number) => void // 删除
   onSetDefault: (id: number) => void // 设置默认
-  // onSelect: (record: Address) => void // 选择
 
-  isSelectd?: boolean // 是否选中
   showActions?: boolean // 是否显示操作按钮
   isOrder?: boolean // 是否是订单模块使用
 }
@@ -23,7 +21,6 @@ const AddressItem: React.FC<Props> = ({
   onEdit, 
   onDelete, 
   onSetDefault, 
-  // onSelect, 
   showActions = true,
   isOrder = false
 }) => {
