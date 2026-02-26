@@ -11,8 +11,9 @@ import HomePage from '@/pages/HomePage'
 import LoginPage from '@/pages/LoginPage'
 import RegisterPage from '@/pages/RegisterPage'
 
-const ProfilePage = lazy(() => import('@/pages/user/Profile'))
+const ProfilePage = lazy(() => import('@/pages/user/profile/Profile'))
 const AddressPage = lazy(() => import('@/pages/user/address/Address'))
+const OrderPage = lazy(() => import('@/pages/user/order/Order'))
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <AddressPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'orders',
+        element: (
+          <Suspense>
+            <OrderPage />
           </Suspense>
         ),
       },

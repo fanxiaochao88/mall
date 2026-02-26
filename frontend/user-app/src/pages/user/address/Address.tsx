@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useAddress } from '@/hooks/serverData/useAddress'
 import { EnvironmentOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button, Modal, Spin, Result, message } from 'antd'
+import { Button, Modal, message } from 'antd'
 import AddressItem from '@/components/addressItem'
+import { LoadingComponent } from '@/components/loading'
+import { ErrorComponent } from '@/components/error'
 import type { Address } from '@/types'
 import { AddressModal } from './AddressModal'
 
@@ -16,19 +18,13 @@ const AddressManagePage: React.FC = () => {
 
     // loading
     if (isLoading) {
-        return (
-          <div className='flex items-center justify-center w-full h-full'>
-            <Spin size="large" />
-          </div>
-        )
+        return <LoadingComponent />
     }
 
     // error
     if (error) {
         return (
-          <div className='flex items-center justify-center w-full h-full'>
-            <Result
-              status="error"
+          <ErrorComponent
               title="加载失败"
               subTitle="请稍后重试"
               extra={[
@@ -37,7 +33,6 @@ const AddressManagePage: React.FC = () => {
                 </Button>
               ]}
             />
-          </div>
         )
     }
 

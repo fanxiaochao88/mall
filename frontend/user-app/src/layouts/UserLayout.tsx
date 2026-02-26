@@ -1,11 +1,19 @@
 /**
  * 用户中心布局组件
  */
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet, Link, useLocation } from 'react-router-dom'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
 export default function UserLayout() {
+  const location = useLocation()
+  const currentPath = location.pathname
+  const getKls = (path: string) => {
+    const baseKls = 'block px-4 py-2 rounded'
+    const activeKls = 'bg-blue-500 text-white font-bold'
+    const hoverKls = 'hover:bg-gray-100'
+    return `${baseKls} ${currentPath === path ? activeKls : hoverKls}`
+  }
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -17,19 +25,19 @@ export default function UserLayout() {
               <nav className="space-y-2">
                 <Link
                   to="/user/orders"
-                  className="block px-4 py-2 rounded hover:bg-gray-100"
+                  className={getKls('/user/orders')}
                 >
                   我的订单
                 </Link>
                 <Link
                   to="/user/address"
-                  className="block px-4 py-2 rounded hover:bg-gray-100"
+                  className={getKls('/user/address')}
                 >
                   收货地址
                 </Link>
                 <Link
                   to="/user/profile"
-                  className="block px-4 py-2 rounded hover:bg-gray-100"
+                  className={getKls('/user/profile')}
                 >
                   个人信息
                 </Link>
