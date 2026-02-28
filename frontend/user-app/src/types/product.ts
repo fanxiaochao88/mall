@@ -2,6 +2,9 @@
  * 商品相关类型定义
  */
 
+/**
+ * 列表项
+ */
 export interface ProductItem {
   id: number
   name: string
@@ -13,6 +16,9 @@ export interface ProductItem {
   merchant_name: string
 }
 
+/**
+ * 详情
+ */
 export interface ProductDetail {
   id: number
   merchant_id: number
@@ -29,6 +35,9 @@ export interface ProductDetail {
   skus: ProductSKU[]
 }
 
+/**
+ * SKU
+ */
 export interface ProductSKU {
   id: number
   sku_name?: string
@@ -37,8 +46,11 @@ export interface ProductSKU {
   image?: string
   attributes?: Record<string, string>
 }
-
+/**
+ * 列表请求参数
+ */
 export interface ProductListQuery {
+  type?: 'all' | 'new' | 'hot' | 'recommend'
   category_id?: number
   keyword?: string
   min_price?: number
@@ -47,7 +59,9 @@ export interface ProductListQuery {
   page?: number
   page_size?: number
 }
-
+/**
+ * 列表返回结构
+ */
 export interface ProductListResponse {
   total: number
   page: number
@@ -63,7 +77,9 @@ export interface Category {
   sort_order: number
   children?: Category[]
 }
-
+/**
+ * 轮播图返回结构
+ */
 export interface Banner {
   id: number
   title: string

@@ -41,3 +41,24 @@
 6. 然后把加载中以及错误状态组件封装成公共组件了
 - 接下来:
    - 开始处理首页, 我预估的首页就是分类, 轮播, 过滤条件, 商品列表. 还要根据接口以及具体的设计文档再说. 我先看设计文档, 接口文档, 然后开始一个一个做
+   我感觉我有思路了
+   0. 头部是搜索, 搜索内容之后进入商品列表页, 这个页面是下一步的开发, 不在本次考虑内, 但是商品卡片确实是可以封装复用的, 商品列表父组件也是可以复用.页值得封装
+   1. 轮播图, 这个antd应该有组件, 这个前置工作就是我把mock-server的数据造好, 尤其是图片, 怎么mock这些数据啊,烦得很
+   2. 选项卡(推荐,热门, 最新), 使用商品列表接口, 我新增了一个type字段'all' | 'new' | 'hot' | 'recommend'
+   展示形式就是, 一个一个的商品选项卡, 2行, 每行4-5个, 然后可以滑动两页
+   3. 商品楼层, 也使用商品列表接口, category_id作为依据, 整个手机, 电脑, ...整个4个楼层. 这个可以封装组件复用
+   楼层就是左侧一个大的商品选项卡, 右侧几个小的. 但是这里的商品选项卡, 文字描述在图片的上方. 和商品列表的商品选项卡有所区分.
+### 首页开发整理
+0. ProductCard 组件：这是核心。建议设计 mode 属性，支持 simple (用于楼层小卡片)、default (用于列表/推荐)、large (用于楼层左侧大图)。
+搜索逻辑：Header 输入关键词 -> 跳转 /products?keyword=xxx。这确实是标准做法，无需单独的 /search 页面。
+1. 推荐网站：https://picsum.photos 或 https://source.unsplash.com 。
+用法：https://picsum.photos/宽度/高度?random=1。每次生成的图片都不一样，非常适合 Mock。
+示例：在 db.json 中直接写 "image": "https://picsum.photos/1200/400?random=1" 。
+2. 接口调整：你在 ProductListQuery 中增加 type 字段是个好主意。虽然原接口用 sort_by 也能部分实现（如 sort_by=sales 对应热门），但 type 字段更符合业务语义（特别是“推荐”往往涉及复杂的后端算法，前端 Mock 用 type 区分更方便）。
+UI 实现：使用 Ant Design 的 Tabs 组件作为容器。对于“滑动两页”，可以在 Tabs 内部包裹一个 Carousel (走马灯) 组件，每一页 Carousel 渲染一组 Grid 布局的商品。
+3. 布局方案：使用 Ant Design 的 Row 和 Col。
+左侧大图：span={6} 或 span={8}。
+右侧小图：span={18} 或 span={16}，内部再嵌套 Row/Col 平分小卡片。
+样式差异：
+你提到“文字在图片上方”。这可以通过 CSS Flex 布局轻松实现 (flex-direction: column-reverse) 或者在 HTML 结构中调换顺序。
+封装 ProductCard 时，通过 props 控制布局模式。

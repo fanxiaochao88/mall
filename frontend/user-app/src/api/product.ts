@@ -12,7 +12,14 @@ import type {
 
 export const productApi = {
   /**
-   * 获取商品列表
+   * @description 获取商品列表
+   * 
+   * 可以通过type参数指定商品类型，
+   * 可以根据过滤参数指定商品分类、价格范围、排序方式等
+   * 搜索框搜索, 分类点击, 选项卡切换
+   * 
+   * @param params - 商品列表查询参数
+   * @returns 商品列表
    */
   getProducts: (params: ProductListQuery) => {
     return request.get<any, ProductListResponse>('/products', { params })

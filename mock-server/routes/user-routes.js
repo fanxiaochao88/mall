@@ -179,9 +179,10 @@ export function setupUserRoutes(server) {
 
   server.get('/api/v1/user/banners', (req, res) => {
     const banners = [
-      { id: 1, title: '新品上市', image: 'https://via.placeholder.com/800x300/4299E1/FFFFFF?text=Banner+1', link: '/products?category=1', sort_order: 1, status: 'active' },
-      { id: 2, title: '限时优惠', image: 'https://via.placeholder.com/800x300/48BB78/FFFFFF?text=Banner+2', link: '/products?category=2', sort_order: 2, status: 'active' },
-      { id: 3, title: '热销推荐', image: 'https://via.placeholder.com/800x300/ED8936/FFFFFF?text=Banner+3', link: '/products?category=3', sort_order: 3, status: 'active' }
+      { id: 1, title: '新品上市', image: 'https://picsum.photos/1200/400?random=1', link: '/products?category=1', sort_order: 1, status: 'active' },
+      { id: 2, title: '限时优惠', image: 'https://picsum.photos/1200/400?random=2', link: '/products?category=2', sort_order: 2, status: 'active' },
+      { id: 3, title: '热销推荐', image: 'https://picsum.photos/1200/400?random=3', link: '/products?category=3', sort_order: 3, status: 'active' },
+      { id: 4, title: '热销推荐', image: 'https://picsum.photos/1200/400?random=4', link: '/products?category=4', sort_order: 4, status: 'active' }
     ]
     
     res.json({ code: 200, message: '成功', data: banners })

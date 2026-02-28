@@ -7,10 +7,9 @@ import MainLayout from '@/layouts/MainLayout'
 import UserLayout from '@/layouts/UserLayout'
 
 // 页面组件 - 稍后创建
-import HomePage from '@/pages/HomePage'
+import HomePage from '@/pages/home/HomePage'
 import LoginPage from '@/pages/LoginPage'
 import RegisterPage from '@/pages/RegisterPage'
-
 const ProfilePage = lazy(() => import('@/pages/user/profile/Profile'))
 const AddressPage = lazy(() => import('@/pages/user/address/Address'))
 const OrderPage = lazy(() => import('@/pages/user/order/Order'))
