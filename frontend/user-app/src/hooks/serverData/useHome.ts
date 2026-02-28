@@ -8,6 +8,10 @@ export const homeKeys = {
   products: (params: ProductListQuery) => ['home', 'products', params] as const,
 }
 
+/**
+ * @description 首页数据
+ */
+
 export function useHome() {
   const queryClient = useQueryClient()
 

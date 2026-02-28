@@ -13,7 +13,7 @@ export interface ProductItem {
   max_price: number
   sales: number
   merchant_id: number
-  merchant_name: string
+  merchant_name: string // 商户名称
 }
 
 /**

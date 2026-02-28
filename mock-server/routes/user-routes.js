@@ -191,10 +191,10 @@ export function setupUserRoutes(server) {
   server.get('/api/v1/user/products', (req, res) => {
     const { page = 1, page_size = 20 } = req.query
     
-    const products = Array.from({ length: 20 }, (_, i) => ({
+    const products = Array.from({ length: 10 }, (_, i) => ({
       id: i + 1,
       name: `商品名称 ${i + 1}`,
-      image: `https://via.placeholder.com/300/4299E1/FFFFFF?text=Product+${i + 1}`,
+      image: `https://picsum.photos/400/400?random=${Math.floor(Math.random() * 1000)}`,
       min_price: (i + 1) * 10000,
       max_price: (i + 1) * 15000,
       sales: Math.floor(Math.random() * 1000),
