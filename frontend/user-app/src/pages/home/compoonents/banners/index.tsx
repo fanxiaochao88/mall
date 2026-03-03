@@ -1,12 +1,13 @@
 import type { Banner } from '@/types'
 import { Carousel } from 'antd'
+import BannersSkeleton from './Skeleton'
 
 interface BannersProps {
-  banners: Banner[]
+  banners: Banner[],
+  isLoading: boolean,
 }
 
-export default function Banners({ banners }: BannersProps) {
-
+export default function Banners({ banners, isLoading }: BannersProps) {
 
   if (!banners?.length) return null
 
@@ -18,7 +19,7 @@ export default function Banners({ banners }: BannersProps) {
   }
 
   return (
-    <div className='relative mx-auto w-[77%]'>
+    <div className='relative mx-auto w-[77%] h-[400px]'>
       <Carousel
         autoplay
         dots
@@ -30,16 +31,18 @@ export default function Banners({ banners }: BannersProps) {
         draggable
         arrows
       >
-        {banners.map((banner) => (
-          <div key={banner.id}>
-            <img
-              onClick={handleBannerClick(banner)}
-              src={banner.image}
-              alt={banner.title}
-              className='w-full object-cover'
-            />
-          </div>
-        ))}
+        {
+          isLoading ? <BannersSkeleton /> : banners.map((banner) => (
+            <div key={banner.id}>
+              <img
+                onClick={handleBannerClick(banner)}
+                src={banner.image}
+                alt={banner.title}
+                className='w-full object-cover'
+              />
+            </div>
+          ))
+        }
       </Carousel>
     </div>
   )

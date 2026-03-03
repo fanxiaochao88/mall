@@ -29,7 +29,7 @@ export function useHome() {
   })
 
   // 商品列表 - 带参数，key 里包含参数
-  const { data: productData, isLoading: isProductsLoading } = useQuery({
+  const { data: productData, isLoading: isProductsLoading, error: productsError } = useQuery({
     queryKey: homeKeys.products(productParams),
     queryFn: () => productApi.getProducts(productParams),
   })
@@ -59,6 +59,7 @@ export function useHome() {
     products: productData?.items ?? [],
     total: productData?.total ?? 0,
     isProductsLoading,
+    productsError,
     productParams,
     
     // 操作方法
