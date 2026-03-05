@@ -13,6 +13,7 @@ import RegisterPage from '@/pages/RegisterPage'
 const ProfilePage = lazy(() => import('@/pages/user/profile/Profile'))
 const AddressPage = lazy(() => import('@/pages/user/address/Address'))
 const OrderPage = lazy(() => import('@/pages/user/order/Order'))
+const ProductListPage = lazy(() => import('@/pages/products/ProductListPage'))
 
 const router = createBrowserRouter([
   {
@@ -24,10 +25,10 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       // TODO: 其他公开页面路由
-      // {
-      //   path: 'products',
-      //   element: <ProductListPage />,
-      // },
+      {
+        path: 'products',
+        element: <ProductListPage />,
+      }
       // {
       //   path: 'products/:id',
       //   element: <ProductDetailPage />,

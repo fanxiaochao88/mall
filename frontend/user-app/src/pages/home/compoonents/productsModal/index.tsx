@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button, Tabs } from 'antd'
 import { useProducts } from '@/hooks/serverData/useProducts'
 import type { ProductListQuery } from '@/types'
@@ -9,11 +10,13 @@ import ProductCardSkeleton from '@/components/productCard/Skeletion'
 
 const RecommendedTabs: React.FC = () => {
 
-  const { changeType, products, isLoading, error } = useProducts({
+  const navigate = useNavigate()
+
+  const { changeType, products, isLoading, error, params } = useProducts({
     type: 'recommend',
     category_id: 0,
     page: 1,
-    page_size: 30,
+    page_size: 10,
   })
 
   const tabItems = [
@@ -29,6 +32,10 @@ const RecommendedTabs: React.FC = () => {
 
   const handleMore = () => {
     console.log('跳转商品列表页面')
+    navigate({
+      pathname: '/products',
+      search: `?type=${params.type}`
+    })
   }
 
   return (

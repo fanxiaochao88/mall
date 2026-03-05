@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { LoadingComponent } from '@/components/loading'
 import { useProducts } from '@/hooks/serverData/useProducts'
@@ -16,7 +17,10 @@ interface Props {
 }
 
 const ProductFloor: React.FC<Props> = ({ category_id, title, bgColor = 'bg-white' }) => {
-  const { products, isLoading } = useProducts({
+
+  const navigate = useNavigate()
+
+  const { products, isLoading, params } = useProducts({
     type: 'all',
     category_id,
     page: 1,
@@ -26,12 +30,19 @@ const ProductFloor: React.FC<Props> = ({ category_id, title, bgColor = 'bg-white
   const mainProduct = products[0] // 左侧大卡片
   const subProducts = products.slice(1) // 右侧6个小卡片
 
+  const handleMore = () => {
+    navigate({
+      pathname: '/products',
+      search: `?category_id=${params.category_id}`
+    })
+  }
+
   return (
     <section className={`p-6 rounded-lg shadow-sm mb-6 ${bgColor}`}>
       {/* 楼层顶部 */}
       <div className="flex items-center justify-between mb-4 bober-b pb-2">
         <Title level={5}>{title}</Title>
-        <Button icon={<RightOutlined />} iconPlacement='end'>更多</Button>
+        <Button icon={<RightOutlined />} iconPlacement='end' onClick={handleMore}>更多</Button>
       </div>
       {/* 楼层内容 */}
       {
