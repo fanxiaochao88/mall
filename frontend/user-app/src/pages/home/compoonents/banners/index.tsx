@@ -9,9 +9,6 @@ interface BannersProps {
 
 export default function Banners({ banners, isLoading }: BannersProps) {
 
-  if (!banners?.length) return null
-
-
   const handleBannerClick = (banner: Banner) => () => {
     if (banner.link) {
       window.open(banner.link, '_blank')
@@ -19,7 +16,7 @@ export default function Banners({ banners, isLoading }: BannersProps) {
   }
 
   return (
-    <div className='relative mx-auto w-[77%] h-[400px]'>
+    <div className='relative mx-auto w-[77%] !h-[400px]'>
       <Carousel
         autoplay
         dots

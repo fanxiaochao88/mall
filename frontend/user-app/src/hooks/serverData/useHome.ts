@@ -24,6 +24,7 @@ export function useHome() {
   // 商品列表参数 - 用 state 管理
   const [productParams, setProductParams] = useState<ProductListQuery>({
     type: 'recommend',
+    category_id: 0,
     page: 1,
     page_size: 10,
   })

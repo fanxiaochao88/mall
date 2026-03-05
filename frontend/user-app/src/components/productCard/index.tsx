@@ -5,13 +5,17 @@ import type {  ProductItem  } from '@/types/product';
 
 interface Props {
   product: ProductItem,
-  mode?: 'default' | 'overlay'
+  mode?: 'default' | 'overlay',
+  size?: 'normal' | 'large'
 }
 
 const { Text } = Typography;
 
 
-const ProductCard: React.FC<Props> = ({ product, mode = 'default' }) => {
+const ProductCard: React.FC<Props> = ({ product, mode = 'default', size = 'normal' }) => {
+
+  // 根据size设置不同的样式
+  const imageHeight = size === 'large' ? 'h-96' : 'h-48';
   
   // 价格显示逻辑
   const renderPrice = () => {
@@ -31,7 +35,7 @@ const ProductCard: React.FC<Props> = ({ product, mode = 'default' }) => {
           <img 
             src={product.image} 
             alt={product.name} 
-            className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500" 
+            className={`w-full ${imageHeight} object-cover transform group-hover:scale-105 transition-transform duration-500`}
           />
           
           {/* 文字浮层 (底部渐变) */}
@@ -62,7 +66,7 @@ const ProductCard: React.FC<Props> = ({ product, mode = 'default' }) => {
             <img 
               alt={product.name} 
               src={product.image} 
-              className="w-full h-48 object-cover transform hover:scale-105 transition-transform duration-300"
+              className={`w-full ${imageHeight} object-cover transform hover:scale-105 transition-transform duration-300`}
             />
           </div>
         }
