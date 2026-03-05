@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { LoadingComponent } from '@/components/loading'
-import { useHome } from '@/hooks/serverData/useHome'
+import { useProducts } from '@/hooks/serverData/useProducts'
 
 import { Button, Typography } from 'antd'
 import { RightOutlined } from '@ant-design/icons'
@@ -16,16 +16,12 @@ interface Props {
 }
 
 const ProductFloor: React.FC<Props> = ({ category_id, title, bgColor = 'bg-white' }) => {
-  const { setProductParams, products, isProductsLoading } = useHome()
-
-  useEffect(() => {
-    setProductParams({
-      type: 'all',
-      category_id,
-      page: 1,
-      page_size: 7,
-    })
-  }, [category_id, setProductParams])
+  const { products, isLoading } = useProducts({
+    type: 'all',
+    category_id,
+    page: 1,
+    page_size: 7,
+  })
 
   const mainProduct = products[0] // 左侧大卡片
   const subProducts = products.slice(1) // 右侧6个小卡片
@@ -39,7 +35,7 @@ const ProductFloor: React.FC<Props> = ({ category_id, title, bgColor = 'bg-white
       </div>
       {/* 楼层内容 */}
       {
-        isProductsLoading ? <LoadingComponent /> : (
+        isLoading ? <LoadingComponent /> : (
           <div className="flex gap-4" style={{minHeight: '340px'}}>
             {/* 左侧大图片 */}
             <div className='w-1/4'>

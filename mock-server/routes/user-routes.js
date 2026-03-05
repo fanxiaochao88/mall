@@ -189,7 +189,7 @@ export function setupUserRoutes(server) {
   })
 
   server.get('/api/v1/user/products', (req, res) => {
-    const { page = 1, page_size = 20 } = req.query
+    const { page = 1, page_size = 10 } = req.query
     
     const products = Array.from({ length: page_size }, (_, i) => ({
       id: i + 1,

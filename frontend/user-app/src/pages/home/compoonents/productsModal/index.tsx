@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Tabs } from 'antd'
-import { useHome } from '@/hooks/serverData/useHome'
+import { useProducts } from '@/hooks/serverData/useProducts'
 import type { ProductListQuery } from '@/types'
 import ProductCard from '@/components/productCard'
 import { ErrorComponent } from '@/components/error'
@@ -9,7 +9,12 @@ import ProductCardSkeleton from '@/components/productCard/Skeletion'
 
 const RecommendedTabs: React.FC = () => {
 
-  const { changeProductType, products, isProductsLoading, productsError, setProductParams } = useHome()
+  const { changeType, products, isLoading, error } = useProducts({
+    type: 'recommend',
+    category_id: 0,
+    page: 1,
+    page_size: 30,
+  })
 
   const tabItems = [
     { key: 'recommend', label: '热门推荐' },
@@ -19,12 +24,7 @@ const RecommendedTabs: React.FC = () => {
 
   // 切换tab, 触发组件重新渲染, 触发useQuery, 发现是一个新的key, 触发queryFn
   const handleChange = (key: string) => {
-    changeProductType(key as ProductListQuery['type'])
-    setProductParams({
-      type: key as ProductListQuery['type'],
-      page: 1,
-      page_size: 30,
-    })
+    changeType(key as ProductListQuery['type'])
   };
 
   const handleMore = () => {
@@ -40,7 +40,7 @@ const RecommendedTabs: React.FC = () => {
       </div>
       {/* 加载中 */}
       {
-        isProductsLoading ? (
+        isLoading ? (
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
             <ProductCardSkeleton count={10} />
           </div>
@@ -48,7 +48,7 @@ const RecommendedTabs: React.FC = () => {
       }
       {/* 错误 */}
       {
-        productsError ? <ErrorComponent /> : null
+        error ? <ErrorComponent /> : null
       }
       {/* 商品列表 */}
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4'>
