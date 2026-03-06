@@ -14,6 +14,7 @@ const ProfilePage = lazy(() => import('@/pages/user/profile/Profile'))
 const AddressPage = lazy(() => import('@/pages/user/address/Address'))
 const OrderPage = lazy(() => import('@/pages/user/order/Order'))
 const ProductListPage = lazy(() => import('@/pages/products/ProductListPage'))
+const ProductDetailPage = lazy(() => import('@/pages/detail/index'))
 
 const router = createBrowserRouter([
   {
@@ -28,11 +29,11 @@ const router = createBrowserRouter([
       {
         path: 'products',
         element: <ProductListPage />,
-      }
-      // {
-      //   path: 'products/:id',
-      //   element: <ProductDetailPage />,
-      // },
+      },
+      {
+        path: 'product/:id',
+        element: <ProductDetailPage />,
+      },
     ],
   },
   {

@@ -20,31 +20,31 @@ export interface ProductItem {
  * 详情
  */
 export interface ProductDetail {
-  id: number
-  merchant_id: number
-  merchant_name: string
-  category_id: number
-  category_name: string
-  name: string
-  description: string
-  images: string[]
-  video?: string
-  status: string
-  sales: number
-  created_at: string
-  skus: ProductSKU[]
+  id: number // 商品ID
+  merchant_id: number // 商户ID
+  merchant_name: string // 商户名称
+  category_id: number // 分类ID
+  category_name: string // 分类名称
+  name: string // 商品名称
+  description: string // 商品描述
+  images: string[] // 商品图片列表
+  video?: string // 商品视频URL（可选）
+  status: string // 商品状态（on_sale: 在售, off_sale: 下架）
+  sales: number // 销量
+  created_at: string // 创建时间
+  skus: ProductSKU[] // SKU列表
 }
 
 /**
- * SKU
+ * SKU（库存量单位）
  */
 export interface ProductSKU {
-  id: number
-  sku_name?: string
-  price: number
-  stock: number
-  image?: string
-  attributes?: Record<string, string>
+  id: number // SKU ID
+  sku_name?: string // SKU名称（可选，如"红色-L码"）
+  price: number // SKU价格
+  stock: number // 库存数量
+  image?: string // SKU图片（可选，如不同颜色的商品图）
+  attributes?: Record<string, string> // SKU属性（如 {color: "红色", size: "L"}）
 }
 /**
  * 列表请求参数

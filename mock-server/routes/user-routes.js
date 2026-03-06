@@ -226,17 +226,22 @@ export function setupUserRoutes(server) {
       name: '测试商品 ' + id,
       description: '这是一个测试商品的详细描述信息...',
       images: [
-        `https://via.placeholder.com/600/4299E1/FFFFFF?text=Image+1`,
-        `https://via.placeholder.com/600/48BB78/FFFFFF?text=Image+2`,
-        `https://via.placeholder.com/600/ED8936/FFFFFF?text=Image+3`
+        'https://picsum.photos/1200/1200?random=7',
+        'https://picsum.photos/1200/1200?random=8',
+        'https://picsum.photos/1200/1200?random=9',
+        'https://picsum.photos/1200/1200?random=10',
+        'https://picsum.photos/1200/1200?random=11',
+        'https://picsum.photos/1200/1200?random=12',
       ],
-      video: null,
+      video: ['https://www.w3schools.com/html/mov_bbb.mp4'],
       status: 'on_sale',
       sales: 999,
       created_at: '2024-01-01T00:00:00Z',
       skus: [
-        { id: 1, sku_name: '默认', price: 299900, stock: 100, image: null, attributes: { color: '黑色', memory: '128G' } },
-        { id: 2, sku_name: '白色 256G', price: 349900, stock: 50, image: null, attributes: { color: '白色', memory: '256G' } }
+        { id: 1, sku_name: '黑色 128G', price: 299900, stock: 100, image: null, attributes: { color: '黑色', memory: '128G' } },
+        { id: 2, sku_name: '白色 256G', price: 349900, stock: 50, image: null, attributes: { color: '白色', memory: '256G' } },
+        { id: 2, sku_name: '红色 256G', price: 349900, stock: 0, image: null, attributes: { color: '红色', memory: '256G' } },
+        { id: 2, sku_name: '白色 128G', price: 349900, stock: 10, image: null, attributes: { color: '白色', memory: '128' } },
       ]
     }
     
